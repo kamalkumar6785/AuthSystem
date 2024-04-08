@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .card-body a {
+        color: black; /* Set link color to default blue */
+        text-decoration: none; /* Add underline to links */
+    }
+    
+        .card-body a:hover {
+            color: blue; /* Change link color on hover */
+            text-decoration: none; /* Keep underline on hover */
+        }
+
+    .btn-custom-width{
+        width: 80px;
+        margin-bottom: 5px;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-center bg-secondary text-white">
+                <div class="card-body">
+                    <h1 class="display-4">Hello</h1>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>User Id</td>
+                                <td>@ViewData["UserID"]</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary btn-custom-width" onclick="editItem(this)">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-custom-width" onclick="deleteItem(this)">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>@ViewData["Email"]</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary btn-custom-width" onclick="editItem(this)">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-custom-width" onclick="deleteItem(this)">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Facebook URL</td>
+                                <td><a href="@ViewData["FacebookURL"]">@ViewData["FacebookURL"]</a></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary btn-custom-width" onclick="editItem(this)">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-custom-width" onclick="deleteItem(this)">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Linkedin URL</td>
+                                <td><a href="@ViewData["LinkedinURL"]">@ViewData["LinkedinURL"]</a></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary btn-custom-width" onclick="editItem(this)">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-custom-width" onclick="deleteItem(this)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" onclick="openAddItemModal()">Add New Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for adding new item -->
+<div class="modal" id="addItemModal" tabindex="-1" role="dialog">
+    <form id="addItemForm"  asp-controller="Home" asp-action="Save" method="post">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="itemName">Item Name:</label>
+                        <input type="text" class="form-control" id="itemName" name="itemName">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemValue">Value:</label>
+                        <input type="text" class="form-control" id="itemValue" name="itemValue">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    <script>
+        function openAddItemModal() {
+            $('#addItemModal').modal('show');
+        }
+
+        function saveNewItem() {
+            // Retrieve values from input fields
+            var itemName = $('#itemName').val();
+            var itemValue = $('#itemValue').val();
+
+            // Append new row to table
+            var newRow = '<tr><td>' + itemName + '</td><td>' + itemValue + '</td>' +
+                '<td><button class="btn btn-sm btn-primary" onclick="editItem(this)">Edit</button>' +
+                '<button class="btn btn-sm btn-danger" onclick="deleteItem(this)">Delete</button></td></tr>';
+            $('table tbody').append(newRow);
+
+            //
+
+
+            //
+
+            // Clear input fields
+            $('#itemName').val('');
+            $('#itemValue').val('');
+
+            // Hide modal
+            $('#addItemModal').modal('hide');
+        }
+
+        function editItem(button) {
+            var row = $(button).closest('tr');
+            var itemName = row.find('td:first-child').text();
+            var itemValue = row.find('td:nth-child(2)').text();
+
+            // Populate modal fields with current values
+            $('#itemName').val(itemName);
+            $('#itemValue').val(itemValue);
+
+            // Show modal
+            $('#addItemModal').modal('show');
+        }
+
+        function deleteItem(button) {
+            $(button).closest('tr').remove();
+        }
+    </script>
+}

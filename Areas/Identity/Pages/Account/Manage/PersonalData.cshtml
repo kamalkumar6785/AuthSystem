@@ -1,0 +1,48 @@
+﻿@page
+@model ApplicationUser
+@{
+    ViewData["Title"] = "Personal Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
+        <p>
+            <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+        </p>
+        <form id="download-data" asp-page="DownloadPersonalData" method="post">
+            <button class="btn btn-primary" type="submit">Download</button>
+        </form>
+        <p>
+            <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger">Delete</a>
+        </p>
+
+        <!-- Edit button -->
+        <button id="editBtn" class="btn btn-primary">Edit</button>
+
+        <!-- Edit form (initially hidden) -->
+        <form id="editForm" method="post" style="display: none;">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="FirstName" class="form-control" value="" />
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="LastName" class="form-control" value="g" />
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Toggle visibility of edit form when edit button is clicked
+        document.getElementById("editBtn").addEventListener("click", function () {
+            document.getElementById("editForm").style.display = "block";
+        });
+    </script>
+}
