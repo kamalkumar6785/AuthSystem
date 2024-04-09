@@ -33,8 +33,16 @@ namespace AuthSystem.Controllers
             ViewData["Email"] = user.Email;
             ViewData["LinkedinURL"] = user.LinkedinURL;
             ViewData["FacebookURL"] = user.FacebookURL;
+             
+            var userId = _userManager.GetUserId(this.User);
 
-            return View();
+            var listtt = _dbContext.Additionals.Where(n => n.UserId == userId).ToList();
+
+            
+            return View(listtt);
+
+
+             
         }
 
         public IActionResult Privacy()

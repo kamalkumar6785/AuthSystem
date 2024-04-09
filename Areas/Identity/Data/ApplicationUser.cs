@@ -34,6 +34,6 @@ public class ApplicationUser : IdentityUser
 
 
     [PersonalData]
-    public List<Additional>? Additional {  get; set; }
+    public List<Additional>? Additionals {  get; set; }
 }
 
