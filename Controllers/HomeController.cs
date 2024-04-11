@@ -40,9 +40,7 @@ namespace AuthSystem.Controllers
 
             
             return View(listtt);
-
-
-             
+ 
         }
 
         public IActionResult Privacy()
@@ -88,6 +86,37 @@ namespace AuthSystem.Controllers
                 return View("YourFormView");
             }
         }
+
+        
+   
+
+
+
+
+        [HttpPost]
+        public IActionResult Edit(int editItemId, string editItemName, string editItemValue)
+        {
+            var userId = _userManager.GetUserId(this.User);
+
+           
+                var note = _dbContext.Additionals.FirstOrDefault(n => n.UserId == userId && n.Id== editItemId);
+                if (note != null)
+                {
+                    // Update the properties
+                    note.Title = editItemName;
+                    note.Value = editItemValue;
+                    _dbContext.SaveChanges();
+                    return RedirectToAction(nameof(Index), "Home");
+                }
+            
+            return Content("Error updating record.");
+        }
+
+
+
+
+
+
 
     }
 }
