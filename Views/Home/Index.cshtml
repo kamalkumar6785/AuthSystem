@@ -9,13 +9,13 @@
 
 <style>
     .card-body a {
-        color: black; /* Set link color to default blue */
-        text-decoration: none; /* Add underline to links */
+        color: black;
+        text-decoration: none; 
     }
     
         .card-body a:hover {
-            color: blue; /* Change link color on hover */
-            text-decoration: none; /* Keep underline on hover */
+            color: blue; 
+            text-decoration: none;
         }
 
     .btn-custom-width{
@@ -165,6 +165,7 @@
 @section Scripts {
     <script>
         function openAddItemModal() {
+            console.log("Here");
             $('#addItemModal').modal('show');
         }
 
@@ -175,20 +176,15 @@
             var itemName = row.find('td:first-child').text();
             var itemValue = row.find('td:nth-child(2)').text();
 
-            // Populate modal fields with current values
             $('#editItemName').val(itemName);
             $('#editItemValue').val(itemValue);
-            var itemId = $(button).data('item-id'); // Retrieve the data-item-id attribute value
-
-            // Populate modal fields with current values
-            $('#editItemId').val(itemId); // Set the value of the hidden input field
+            var itemId = $(button).data('item-id');
+            $('#editItemId').val(itemId); 
 
 
-            // Change modal title and action URL for editing
             $('#editItemModal .modal-title').text('Edit Item');
-            $('#editItemForm').attr('asp-action', 'Edit'); // Assuming 'Edit' is the action for editing
+            $('#editItemForm').attr('asp-action', 'Edit');
 
-            // Show modal
             $('#editItemModal').modal('show');
         }
 
@@ -196,8 +192,6 @@
 
             $(button).closest('tr').remove();
         }
-
-
 
     </script>
 }

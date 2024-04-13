@@ -10,20 +10,18 @@ using AuthSystem.Data;
 
 namespace AuthSystem.Controllers
 {
+
     [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly AuthDbContext _dbContext; // Inject AuthDbContext
-
-
         public HomeController(ILogger<HomeController> logger,UserManager<ApplicationUser> userManager, AuthDbContext dbContext)
         {
             _logger = logger;
             this._userManager = userManager;
             _dbContext = dbContext; // Inject AuthDbContext
-
         }
 
         public async Task<IActionResult> Index()
@@ -35,10 +33,7 @@ namespace AuthSystem.Controllers
             ViewData["FacebookURL"] = user.FacebookURL;
              
             var userId = _userManager.GetUserId(this.User);
-
             var listtt = _dbContext.Additionals.Where(n => n.UserId == userId).ToList();
-
-            
             return View(listtt);
  
         }
@@ -59,39 +54,30 @@ namespace AuthSystem.Controllers
         {
 
             if (ModelState.IsValid)
-            {
-                // Get the current user
+            { 
                 var user = await _userManager.GetUserAsync(User);
 
-                // Create a new Additional object
+
                 var additionalItem = new Additional
                 {
                     Title = itemName,
                     Value = itemValue,
-                    UserId = await _userManager.GetUserIdAsync(user) // Associate additional item with the current user
+                    UserId = await _userManager.GetUserIdAsync(user) 
                 };
-
-                // Add the new additional item to the context and save changes
 
 
                 _dbContext.Additionals.Add(additionalItem);
                 await _dbContext.SaveChangesAsync();
 
-                // Redirect to the home page or wherever appropriate
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                // If model state is not valid, return to the form
                 return View("YourFormView");
             }
         }
 
         
-   
-
-
-
 
         [HttpPost]
         public IActionResult Edit(int editItemId, string editItemName, string editItemValue)
@@ -113,10 +99,21 @@ namespace AuthSystem.Controllers
         }
 
 
-
-
-
-
-
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+ 
+            var itemToDelete = _dbContext.Additionals.Find(id);
+            if (itemToDelete != null)
+            {
+                _dbContext.Additionals.Remove(itemToDelete);
+                _dbContext.SaveChanges();
+                return RedirectToAction(nameof(Index)); 
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
