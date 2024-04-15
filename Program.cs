@@ -9,9 +9,10 @@ namespace AuthSystem
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("AuthDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthDbContextConnection' not found.");
+            
 
-            builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<AuthDbContext>(options =>
+            options.UseInMemoryDatabase(databaseName: "MyInMemoryDatabase"));
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<AuthDbContext>();
 

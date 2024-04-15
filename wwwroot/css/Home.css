@@ -1,0 +1,66 @@
+﻿
+.card {
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.display-4 {
+    color: #17a2b8;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.user-info {
+    margin-bottom: 20px;
+    color: #495057;
+    font-size: 1.1rem;
+}
+
+    .user-info strong {
+        color: green;
+    }
+
+    .user-info .email {
+        display: inline-block;
+        width: calc(100% - 100px); /* Calculate remaining width */
+        vertical-align: top;
+    }
+
+.table {
+    margin-bottom: 20px;
+}
+
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .table th {
+        background-color: maroon;
+        color: #fff;
+    }
+
+    .table th, .table td {
+        border: 2px solid black;
+    }
+
+.btn-primary {
+    background-color: rebeccapurple;
+    border: none;
+    font-weight: bold;
+}
+
+    .btn-primary:hover {
+        background-color: purple;
+        border: none;
+    }
+
+.btn-custom-width {
+    width: 80px; /* Adjust the width as needed */
+    margin-top: 2px;
+}
+

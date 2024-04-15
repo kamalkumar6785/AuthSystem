@@ -4,8 +4,6 @@ using AuthSystem.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Policy;
-using Microsoft.EntityFrameworkCore;
 using AuthSystem.Data;
 
 namespace AuthSystem.Controllers
@@ -16,12 +14,13 @@ namespace AuthSystem.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly AuthDbContext _dbContext; // Inject AuthDbContext
+        private readonly AuthDbContext _dbContext; 
+
         public HomeController(ILogger<HomeController> logger,UserManager<ApplicationUser> userManager, AuthDbContext dbContext)
         {
             _logger = logger;
             this._userManager = userManager;
-            _dbContext = dbContext; // Inject AuthDbContext
+            _dbContext = dbContext; 
         }
 
         public async Task<IActionResult> Index()
@@ -35,8 +34,8 @@ namespace AuthSystem.Controllers
 
 
             var userId = _userManager.GetUserId(this.User);
-            var listtt = _dbContext.Additionals.Where(n => n.UserId == userId).ToList();
-            return View(listtt);
+            var URL_list = _dbContext.Additionals.Where(n => n.UserId == userId).ToList();
+            return View(URL_list);
  
         }
 
@@ -90,7 +89,7 @@ namespace AuthSystem.Controllers
                 var note = _dbContext.Additionals.FirstOrDefault(n => n.UserId == userId && n.Id== editItemId);
                 if (note != null)
                 {
-                    // Update the properties
+                    // Update the additional list for different urls
                     note.Title = editItemName;
                     note.Value = editItemValue;
                     _dbContext.SaveChanges();
