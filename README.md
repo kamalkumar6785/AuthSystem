@@ -17,4 +17,5 @@ Edit an URL
 ![image](https://github.com/kamalkumar6785/AuthSystem/assets/162416431/930f9d60-aace-490e-81d9-e608f9965f58)
 
 Manage Account Section
-![Uploading image.png…]()
+![image](https://github.com/kamalkumar6785/AuthSystem/assets/162416431/6cf65322-a0cc-44a7-a86a-5fb5b9da69d7)
+
