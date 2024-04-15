@@ -29,9 +29,11 @@ namespace AuthSystem.Controllers
             ViewData["UserID"]= _userManager.GetUserId(this.User);
             var user = await _userManager.GetUserAsync(User);
             ViewData["Email"] = user.Email;
-            ViewData["LinkedinURL"] = user.LinkedinURL;
-            ViewData["FacebookURL"] = user.FacebookURL;
-             
+            ViewData["FirstName"] = user.FirstName;
+            ViewData["LastName"] = user.LastName;
+
+
+
             var userId = _userManager.GetUserId(this.User);
             var listtt = _dbContext.Additionals.Where(n => n.UserId == userId).ToList();
             return View(listtt);

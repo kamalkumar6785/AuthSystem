@@ -19,17 +19,6 @@ public class ApplicationUser : IdentityUser
     [Column(TypeName = "nvarchar(100)")]
     public string LastName { get; set; }
 
-    [PersonalData]
-    [Column(TypeName = "nvarchar(100)")]
-    [StringLength(100)] // Optional: Limit the length of the URL
-    [Url] // Validate that the property is a valid URL
-    public string LinkedinURL { get; set; }
-
-    [PersonalData]
-    [Column(TypeName = "nvarchar(100)")]
-    [StringLength(100)] // Optional: Limit the length of the URL
-    [Url] // Validate that the property is a valid URL
-    public string FacebookURL { get; set; }
 
 
 

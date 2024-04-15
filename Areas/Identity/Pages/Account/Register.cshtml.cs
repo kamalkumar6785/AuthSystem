@@ -82,13 +82,7 @@ namespace AuthSystem.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
 
-            [Url]
-            [Display(Name = "FacebookURL")]
-            public string FacebookURL { get; set; }
-
-            [Url]
-            [Display(Name = "LinkedinURL")]
-            public string LinkedinURL { get; set; }
+     
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -141,8 +135,7 @@ namespace AuthSystem.Areas.Identity.Pages.Account
 
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
-                user.FacebookURL = Input.FacebookURL;
-                user.LinkedinURL = Input.LinkedinURL;
+
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

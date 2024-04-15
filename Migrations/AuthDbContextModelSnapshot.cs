@@ -71,22 +71,12 @@ namespace AuthSystem.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FacebookURL")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("LinkedinURL")
-                        .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -275,7 +265,7 @@ namespace AuthSystem.Migrations
             modelBuilder.Entity("AuthSystem.Areas.Identity.Data.Additional", b =>
                 {
                     b.HasOne("AuthSystem.Areas.Identity.Data.ApplicationUser", null)
-                        .WithMany("Additional")
+                        .WithMany("Additionals")
                         .HasForeignKey("ApplicationUserId");
                 });
 
@@ -332,7 +322,7 @@ namespace AuthSystem.Migrations
 
             modelBuilder.Entity("AuthSystem.Areas.Identity.Data.ApplicationUser", b =>
                 {
-                    b.Navigation("Additional");
+                    b.Navigation("Additionals");
                 });
 #pragma warning restore 612, 618
         }
